@@ -1,0 +1,28 @@
+/* Gerado por scripts/gerar-lps.js — não edite à mão */
+window.COURSE_IMAGES = [
+  "tecnico-em-administracao",
+  "tecnico-em-contabilidade",
+  "tecnico-em-logistica",
+  "tecnico-em-secretaria-escolar",
+  "tecnico-em-transacoes-imobiliarias",
+  "tecnico-em-desenvolvimento-de-sistemas",
+  "tecnico-em-informatica-para-internet",
+  "tecnico-em-automacao-industrial",
+  "tecnico-em-eletromecanica",
+  "tecnico-em-eletrotecnica",
+  "tecnico-em-manutencao-de-maquinas-navais",
+  "tecnico-em-refrigeracao-e-climatizacao",
+  "tecnico-em-soldagem",
+  "tecnico-em-edificacoes",
+  "tecnico-em-design-de-interiores",
+  "tecnico-em-traducao-e-interpretacao-de-libras",
+  "tecnico-em-estetica",
+  "tecnico-em-farmacia",
+  "tecnico-em-gerencia-em-saude",
+  "tecnico-em-nutricao-e-dietetica",
+  "tecnico-em-optica",
+  "tecnico-em-mineracao",
+  "tecnico-em-guia-de-turismo",
+  "tecnico-em-defesa-civil",
+  "tecnico-em-transito"
+];

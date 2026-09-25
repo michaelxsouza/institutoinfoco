@@ -138,6 +138,7 @@
   }
 
   const INITIAL_COURSES = 9;
+  const COURSE_IMG = new Set(window.COURSE_IMAGES || []);
   let showAll = false;
 
   function renderCourses() {
@@ -152,8 +153,10 @@
         c.duration ? `<span class="tag">${icon("clock")} ${esc(c.duration)}</span>` : "",
         c.modality ? `<span class="tag">${icon("laptop")} ${esc(c.modality)}</span>` : ""
       ].join("");
+      const img = COURSE_IMG.has(c.slug);
       return `
-      <article class="course">
+      <article class="course${img ? " course--img" : ""}">
+        ${img ? `<div class="course__media"><img src="assets/img/cursos/${c.slug}-card.webp" width="720" height="480" loading="lazy" alt="${esc(c.name)}" /></div>` : ""}
         <div class="course__head">
           <span class="course__icon">${icon(c.icon)}</span>
           <div>

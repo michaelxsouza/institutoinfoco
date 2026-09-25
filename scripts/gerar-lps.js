@@ -24,6 +24,8 @@ const T = LPS.tracking || {};
 const P = S.pricing;
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+/* Imagem de cada curso: assets/img/cursos/<slug>.webp (topo e seções) e <slug>-card.webp (cards) */
+const hasImage = (slug) => fs.existsSync(path.join(ROOT, `assets/img/cursos/${slug}.webp`));
 const shortName = (name) => name.replace(/^Técnico em /, "");
 
 /* ---------- Ícones ---------- */
@@ -58,7 +60,7 @@ ${ids.map((id) => `    gtag("config", "${esc(id)}");`).join("\n")}
   </script>`;
 }
 
-function head({ title, description, rel, canonical, noindex }) {
+function head({ title, description, rel, canonical, noindex, image }) {
   return `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -71,6 +73,7 @@ function head({ title, description, rel, canonical, noindex }) {
   <meta property="og:title" content="${esc(title)}" />
   <meta property="og:description" content="${esc(description)}" />
   <meta property="og:type" content="website" />
+  ${image ? `<meta property="og:image" content="${esc(image)}" />` : ""}
   ${canonical ? `<link rel="canonical" href="${esc(canonical)}" />\n  <meta property="og:url" content="${esc(canonical)}" />` : ""}
   <link rel="icon" type="image/png" href="${rel}assets/img/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -124,14 +127,16 @@ function lpPage(course) {
     thankYouUrl: `${rel}obrigado/?curso=${course.slug}`
   };
   const faqs = S.faqs.filter((f) => !/Quais cursos estão disponíveis/.test(f.q));
+  const img = hasImage(course.slug) ? `assets/img/cursos/${course.slug}.webp` : "";
+  const ogImage = img && LPS.siteUrl ? `${LPS.siteUrl}/${img}` : "";
 
-  return `${head({ title, description, rel, canonical: url })}
+  return `${head({ title, description, rel, canonical: url, image: ogImage })}
 <body class="lp">
 ${header(rel, waMsg)}
 
   <main>
     <!-- ============ TOPO + FORMULÁRIO ============ -->
-    <section class="lp-hero">
+    <section class="lp-hero${img ? " lp-hero--img" : ""}"${img ? ` style="--hero-img: url('${rel}${img}')"` : ""}>
       <div class="container lp-hero__grid">
         <div class="lp-hero__content">
           <span class="lp-kicker">${esc(course.category)} · Técnico por Competência</span>
@@ -213,16 +218,17 @@ ${header(rel, waMsg)}
 
     <!-- ============ SOBRE A PROFISSÃO ============ -->
     <section class="lp-section">
-      <div class="container lp-about">
-        <div>
+      <div class="container lp-about${img ? " lp-about--img" : ""}">
+        ${img ? `<figure class="lp-about__img"><img src="${rel}${img}" width="1200" height="800" loading="lazy" alt="Profissional ${esc(course.name.replace(/^Técnico/, "técnico"))} trabalhando" /></figure>` : ""}
+        <div class="lp-about__text">
           <span class="eyebrow">Sobre a profissão</span>
           <h2 class="title">O que faz o ${esc(course.name)}</h2>
           <p class="lead">${esc(det.about)}</p>
+          ${det.workplaces.length ? `<div class="lp-work">
+            <h3>Onde atuar</h3>
+            <ul>${det.workplaces.map((w) => `<li>${ic("pin")} ${esc(w)}</li>`).join("")}</ul>
+          </div>` : ""}
         </div>
-        ${det.workplaces.length ? `<div class="lp-work">
-          <h3>Onde atuar</h3>
-          <ul>${det.workplaces.map((w) => `<li>${ic("pin")} ${esc(w)}</li>`).join("")}</ul>
-        </div>` : ""}
       </div>
     </section>
 
@@ -418,6 +424,11 @@ function write(rel, content) {
 }
 
 S.courses.forEach((c) => write(`cursos/${c.slug}/index.html`, lpPage(c)));
+
+// Lista dos cursos que têm imagem, usada pelos cards do site principal
+const withImg = S.courses.filter((c) => hasImage(c.slug)).map((c) => c.slug);
+write("js/course-images.js", `/* Gerado por scripts/gerar-lps.js — não edite à mão */\nwindow.COURSE_IMAGES = ${JSON.stringify(withImg, null, 2)};\n`);
+const missing = S.courses.filter((c) => !hasImage(c.slug)).map((c) => c.slug);
 write("obrigado/index.html", thankYouPage());
 write("politica-de-privacidade/index.html", privacyPage());
 
@@ -433,6 +444,8 @@ if (LPS.siteUrl) {
 
 console.log(`✔ ${S.courses.length} páginas de curso geradas em cursos/`);
 console.log("✔ obrigado/ e politica-de-privacidade/ geradas");
+console.log(`✔ ${withImg.length} cursos com imagem`);
+if (missing.length) console.log("ℹ Sem imagem (usam o ícone): " + missing.map((m) => `assets/img/cursos/${m}.webp`).join(", "));
 console.log("✔ cursos/lista-de-urls.csv (URLs para os anúncios)");
 if (!LPS.siteUrl) console.log("ℹ Preencha lpSettings.siteUrl em js/config.js para gerar o sitemap.xml e as URLs completas.");
 if (!T.googleAdsId) console.log("ℹ Preencha lpSettings.tracking em js/config.js para ativar a conversão do Google Ads.");
