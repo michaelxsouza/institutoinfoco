@@ -162,7 +162,10 @@
           </div>
         </div>
         ${meta ? `<div class="course__meta">${meta}</div>` : ""}
-        <button type="button" class="btn btn--primary js-interest" data-index="${i}">Tenho interesse ${icon("arrow")}</button>
+        <div class="course__actions">
+          <button type="button" class="btn btn--primary js-interest" data-index="${i}">Tenho interesse ${icon("arrow")}</button>
+          ${c.slug ? `<a class="course__link" href="cursos/${c.slug}/">Ver detalhes do curso</a>` : ""}
+        </div>
       </article>`;
     }).join("");
     $("#coursesEmpty").hidden = list.length > 0;
