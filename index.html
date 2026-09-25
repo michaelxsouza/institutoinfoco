@@ -42,10 +42,12 @@
       <nav class="nav" id="nav" aria-label="Navegação principal">
         <ul class="nav__list">
           <li><a href="#inicio" class="nav__link">Início</a></li>
-          <li><a href="#sobre" class="nav__link">Sobre o Instituto</a></li>
+          <li><a href="#sobre" class="nav__link">Sobre</a></li>
           <li><a href="#cursos" class="nav__link">Cursos</a></li>
           <li><a href="#como-funciona" class="nav__link">Como funciona</a></li>
-          <li><a href="#duvidas" class="nav__link">Dúvidas frequentes</a></li>
+          <li><a href="#requisitos" class="nav__link">Requisitos</a></li>
+          <li><a href="#valores" class="nav__link">Valores</a></li>
+          <li><a href="#duvidas" class="nav__link">Dúvidas</a></li>
           <li><a href="#contato" class="nav__link">Contato</a></li>
         </ul>
         <a href="#" class="btn btn--whatsapp nav__cta js-wa" data-wa-msg="Olá! Vim pelo site e gostaria de mais informações sobre os cursos do Instituto Infoco.">
@@ -65,9 +67,9 @@
       <div class="hero__bg" aria-hidden="true"></div>
       <div class="container hero__grid">
         <div class="hero__content">
-          <span class="eyebrow"><span class="dot"></span> Educação e formação profissional</span>
+          <span class="eyebrow"><span class="dot"></span> Técnico por Competência · Reconhecido pelo MEC</span>
           <h1 class="hero__title">Conhecimento que <span class="hl">transforma</span> oportunidades</h1>
-          <p class="hero__subtitle">Encontre cursos e soluções de formação para desenvolver suas habilidades e dar um novo passo na sua trajetória profissional.</p>
+          <p class="hero__subtitle">Transforme sua experiência profissional em diploma técnico com validade nacional. Avaliação online e diploma em até 48 horas úteis.</p>
           <div class="hero__actions">
             <a href="#cursos" class="btn btn--primary btn--lg">Conhecer os cursos <span class="i" data-icon="arrow"></span></a>
             <a href="#" class="btn btn--outline btn--lg js-wa" data-wa-msg="Olá! Gostaria de falar com um consultor do Instituto Infoco.">
@@ -129,7 +131,7 @@
         <header class="section__head reveal">
           <span class="eyebrow">Cursos</span>
           <h2 class="title">Encontre a formação ideal para você</h2>
-          <p class="lead">Pesquise pelo nome ou filtre por área e clique em “Tenho interesse” para receber mais informações.</p>
+          <p class="lead">São 25 cursos técnicos em 10 áreas, para quem já atua na profissão e quer o diploma. Pesquise pelo nome ou filtre por área.</p>
         </header>
 
         <div class="courses__toolbar reveal">
@@ -142,6 +144,9 @@
         </div>
 
         <div class="courses__grid" id="coursesGrid" aria-live="polite"></div>
+        <div class="courses__more" id="coursesMoreWrap" hidden>
+          <button type="button" class="btn btn--outline btn--lg" id="coursesMore">Ver todos os cursos</button>
+        </div>
         <div class="empty" id="coursesEmpty" hidden>
           <span class="i" data-icon="search"></span>
           <p>Nenhum curso encontrado. Não encontrou o que procura?</p>
@@ -155,53 +160,62 @@
       <div class="container">
         <header class="section__head reveal">
           <span class="eyebrow">Como funciona</span>
-          <h2 class="title">Seu caminho até a formação, em quatro etapas</h2>
+          <h2 class="title">Da comprovação ao diploma, em 4 etapas</h2>
         </header>
-        <ol class="steps">
-          <li class="step reveal">
-            <span class="step__num">01</span>
-            <span class="step__icon"><span class="i" data-icon="search"></span></span>
-            <h3>Escolha o curso ou formação</h3>
-            <p>Conheça as opções disponíveis e identifique a área do seu interesse.</p>
-          </li>
-          <li class="step reveal">
-            <span class="step__num">02</span>
-            <span class="step__icon"><span class="i" data-icon="chat"></span></span>
-            <h3>Entre em contato com o Instituto Infoco</h3>
-            <p>Fale pelo WhatsApp ou preencha o formulário de informações.</p>
-          </li>
-          <li class="step reveal">
-            <span class="step__num">03</span>
-            <span class="step__icon"><span class="i" data-icon="compass"></span></span>
-            <h3>Receba as orientações necessárias</h3>
-            <p>Nossa equipe apresenta os detalhes e esclarece as suas dúvidas.</p>
-          </li>
-          <li class="step reveal">
-            <span class="step__num">04</span>
-            <span class="step__icon"><span class="i" data-icon="cap"></span></span>
-            <h3>Comece sua jornada de aprendizagem</h3>
-            <p>Com tudo esclarecido, você dá o próximo passo no seu desenvolvimento.</p>
-          </li>
-        </ol>
+        <ol class="steps" id="stepsList"></ol>
+        <p class="steps__note reveal">Antes de começar, confira os <a href="#requisitos">requisitos para participar</a>.</p>
+      </div>
+    </section>
+
+    <!-- ============ REQUISITOS ============ -->
+    <section class="section section--soft" id="requisitos">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="eyebrow">Requisitos</span>
+          <h2 class="title">Quem pode fazer o Técnico por Competência</h2>
+          <p class="lead">A certificação é para trabalhadores que já têm prática na área e querem o diploma técnico.</p>
+        </header>
+        <div class="reqs" id="requirementsList"></div>
+        <div class="req-summary reveal">
+          <span class="req-summary__label">Resumo</span>
+          <p id="requirementsSummary"></p>
+          <a href="#" class="btn btn--whatsapp js-wa" data-wa-msg="Olá! Quero saber se tenho os requisitos para o Técnico por Competência.">
+            <span class="i" data-icon="whatsapp"></span> Verificar se tenho os requisitos
+          </a>
+        </div>
       </div>
     </section>
 
     <!-- ============ BENEFÍCIOS ============ -->
-    <section class="section section--soft" id="beneficios">
+    <section class="section" id="beneficios">
       <div class="container">
         <header class="section__head reveal">
           <span class="eyebrow">Diferenciais</span>
           <h2 class="title">Por que escolher o Instituto Infoco?</h2>
         </header>
-        <div class="benefits">
-          <article class="benefit reveal"><span class="i" data-icon="user"></span><h3>Atendimento personalizado</h3></article>
-          <article class="benefit reveal"><span class="i" data-icon="send"></span><h3>Facilidade para solicitar informações</h3></article>
-          <article class="benefit reveal"><span class="i" data-icon="book"></span><h3>Conteúdos voltados ao desenvolvimento</h3></article>
-          <article class="benefit reveal"><span class="i" data-icon="grid"></span><h3>Formação em diferentes áreas</h3></article>
-          <article class="benefit reveal"><span class="i" data-icon="compass"></span><h3>Orientação para escolher o curso</h3></article>
-          <article class="benefit reveal"><span class="i" data-icon="whatsapp"></span><h3>Comunicação rápida pelo WhatsApp</h3></article>
-          <article class="benefit reveal"><span class="i" data-icon="laptop"></span><h3>Experiência digital simples e intuitiva</h3></article>
-          <article class="benefit reveal"><span class="i" data-icon="trend"></span><h3>Foco no crescimento profissional</h3></article>
+        <div class="benefits" id="benefitsGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ VALORES ============ -->
+    <section class="section section--soft" id="valores">
+      <div class="container pricing">
+        <div class="pricing__intro reveal">
+          <span class="eyebrow">Valores</span>
+          <h2 class="title">Seu diploma técnico com 40% de desconto</h2>
+          <p class="lead">Um único valor para qualquer um dos 25 cursos técnicos. Tire suas dúvidas e garanta a condição pelo WhatsApp.</p>
+          <ul class="pricing__list" id="pricingList"></ul>
+        </div>
+        <div class="price-card reveal" id="priceCard">
+          <span class="price-card__badge" data-price="discountLabel"></span>
+          <p class="price-card__program" data-price="program"></p>
+          <p class="price-card__old">de <s data-price="oldPrice"></s></p>
+          <p class="price-card__now"><small>por</small> <strong data-price="price"></strong></p>
+          <p class="price-card__note" data-price="note"></p>
+          <a href="#" class="btn btn--whatsapp btn--lg btn--block js-wa" data-wa-msg="Olá! Quero garantir o Técnico por Competência com 40% de desconto.">
+            <span class="i" data-icon="whatsapp"></span> Quero garantir o desconto
+          </a>
+          <a href="#contato" class="btn btn--outline btn--lg btn--block">Solicitar informações</a>
         </div>
       </div>
     </section>
@@ -211,7 +225,7 @@
       <div class="container cta-band__inner reveal">
         <div>
           <h2>Está pronto para investir no seu desenvolvimento?</h2>
-          <p>Fale com o Instituto Infoco e descubra as opções de formação disponíveis para seus objetivos.</p>
+          <p>Fale com o Instituto Infoco, envie sua documentação e conquiste seu diploma técnico reconhecido pelo MEC.</p>
         </div>
         <div class="cta-band__actions">
           <a href="#" class="btn btn--white btn--lg js-wa" data-wa-msg="Olá! Quero conhecer as opções de formação do Instituto Infoco.">
@@ -387,7 +401,7 @@
       <button class="modal__close" data-close aria-label="Fechar"><span class="i" data-icon="close"></span></button>
       <span class="eyebrow">Tenho interesse</span>
       <h3 id="modalTitle">Receba informações sobre o curso</h3>
-      <p class="modal__course"><span class="i" data-icon="cap"></span> <span id="modalCourseName"></span></p>
+      <p class="modal__course"><span class="i" data-icon="cap"></span> <span id="modalCourseName"></span> <span class="modal__price" id="modalPrice"></span></p>
       <form class="lead-form" id="modalForm" novalidate data-source="Modal Tenho interesse">
         <div class="field">
           <label for="m-nome">Nome completo <em>*</em></label>

@@ -5,7 +5,7 @@
 (function () {
   "use strict";
 
-  const { instituteContact: C, formSettings, courses, faqs, testimonials } = window.SITE;
+  const { instituteContact: C, formSettings, courses, faqs, testimonials, pricing, steps, requirements, requirementsSummary, benefits } = window.SITE;
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -38,6 +38,13 @@
     check: S('<path d="M20 6 9 17l-5-5"/>'),
     close: S('<path d="M18 6 6 18M6 6l12 12"/>'),
     clock: S('<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>'),
+    file: S('<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M9 13h6M9 17h4"/>'),
+    shield: S('<path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>'),
+    building: S('<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/>'),
+    leaf: S('<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.2-6.1 2.4-.5 4.9-2 5.8-3.9"/>'),
+    car: S('<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18 10l-2.7-3.6A2 2 0 0 0 13.7 6H7.4a2 2 0 0 0-1.7 1L4 10l-1.5.6A2 2 0 0 0 1 12.5V16c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M9 17h6"/>'),
+    gear: S('<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>'),
+    map: S('<path d="M14.1 4.9 9.9 3.1a2 2 0 0 0-1.8 0L3.6 5.3A1 1 0 0 0 3 6.2v13.2a1 1 0 0 0 1.4.9l3.7-1.9a2 2 0 0 1 1.8 0l4.2 2.1a2 2 0 0 0 1.8 0l4.5-2.2a1 1 0 0 0 .6-.9V4.6a1 1 0 0 0-1.4-.9l-3.7 1.9a2 2 0 0 1-1.8 0Z"/><path d="M15 5.8v15M9 3.2v15"/>'),
     tag: S('<path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"/><circle cx="7.5" cy="7.5" r="1"/>'),
     quote: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.5 5C6.2 5 3.5 7.7 3.5 11v8h7v-7H7c0-2 1.2-3.5 2.5-3.5zM20 5c-3.3 0-6 2.7-6 6v8h7v-7h-3.5c0-2 1.2-3.5 2.5-3.5z"/></svg>',
     instagram: S('<rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/>'),
@@ -125,15 +132,21 @@
 
   function renderFilters() {
     const cats = ["Todos", ...new Set(courses.map((c) => c.category).filter(Boolean))];
+    const count = (c) => c === "Todos" ? courses.length : courses.filter((x) => x.category === c).length;
     $("#courseFilters").innerHTML = cats.map((c) =>
-      `<button type="button" class="chip" data-cat="${esc(c)}" aria-pressed="${c === state.cat}">${esc(c)}</button>`).join("");
+      `<button type="button" class="chip" data-cat="${esc(c)}" aria-pressed="${c === state.cat}">${esc(c)} <span class="chip__n">${count(c)}</span></button>`).join("");
   }
+
+  const INITIAL_COURSES = 9;
+  let showAll = false;
 
   function renderCourses() {
     const list = courses.filter((c) =>
       (state.cat === "Todos" || c.category === state.cat) &&
-      (!state.q || norm(c.name).includes(norm(state.q)) || norm(c.description).includes(norm(state.q))));
-    $("#coursesGrid").innerHTML = list.map((c) => {
+      (!state.q || norm(c.name).includes(norm(state.q)) || norm(c.category).includes(norm(state.q))));
+    const limited = !showAll && state.cat === "Todos" && !state.q && list.length > INITIAL_COURSES;
+    const visible = limited ? list.slice(0, INITIAL_COURSES) : list;
+    $("#coursesGrid").innerHTML = visible.map((c) => {
       const i = courses.indexOf(c);
       const meta = [
         c.duration ? `<span class="tag">${icon("clock")} ${esc(c.duration)}</span>` : "",
@@ -141,21 +154,20 @@
       ].join("");
       return `
       <article class="course">
-        <div class="course__top">
-          ${c.category ? `<span class="course__cat">${esc(c.category)}</span>` : ""}
+        <div class="course__head">
           <span class="course__icon">${icon(c.icon)}</span>
-        </div>
-        <div class="course__body">
-          <h3>${esc(c.name)}</h3>
-          <p>${esc(c.description)}</p>
-          ${meta ? `<div class="course__meta">${meta}</div>` : ""}
-          <div class="course__foot">
-            <button type="button" class="btn btn--primary js-interest" data-index="${i}">Tenho interesse ${icon("arrow")}</button>
+          <div>
+            ${c.category ? `<span class="course__cat">${esc(c.category)}</span>` : ""}
+            <h3>${esc(c.name)}</h3>
           </div>
         </div>
+        ${meta ? `<div class="course__meta">${meta}</div>` : ""}
+        <button type="button" class="btn btn--primary js-interest" data-index="${i}">Tenho interesse ${icon("arrow")}</button>
       </article>`;
     }).join("");
     $("#coursesEmpty").hidden = list.length > 0;
+    $("#coursesMoreWrap").hidden = !limited;
+    if (limited) $("#coursesMore").textContent = `Ver todos os ${list.length} cursos`;
   }
 
   function fillCourseSelects() {
@@ -178,6 +190,7 @@
       $$(".chip").forEach((c) => c.setAttribute("aria-pressed", String(c === b)));
       renderCourses();
     });
+    $("#coursesMore").addEventListener("click", () => { showAll = true; renderCourses(); });
     $("#coursesGrid").addEventListener("click", (e) => {
       const b = e.target.closest(".js-interest"); if (!b) return;
       openModal(courses[+b.dataset.index], b);
@@ -191,6 +204,7 @@
     lastFocus = trigger || document.activeElement;
     resetForm($("#modalForm"));
     $("#modalCourseName").textContent = course.name;
+    $("#modalPrice").textContent = pricing && pricing.show ? pricing.price : "";
     $("#m-curso").value = course.name;
     modal.hidden = false;
     document.body.classList.add("modal-open");
@@ -215,8 +229,47 @@
     });
   }
 
+  /* ---------------- Etapas, requisitos, benefícios e valores ---------------- */
+  function renderSteps() {
+    $("#stepsList").innerHTML = steps.map((st, i) => `
+      <li class="step reveal">
+        <span class="step__num">${String(i + 1).padStart(2, "0")}</span>
+        <span class="step__icon">${icon(st.icon)}</span>
+        <h3>${esc(st.title)}</h3>
+        <p>${esc(st.text)}</p>
+      </li>`).join("");
+  }
+
+  function renderRequirements() {
+    $("#requirementsList").innerHTML = requirements.map((r, i) => `
+      <article class="req reveal">
+        <span class="req__icon">${icon(r.icon)}</span>
+        <div>
+          <span class="req__n">Requisito ${i + 1}</span>
+          <h3>${esc(r.title)}</h3>
+          <p>${esc(r.text)}</p>
+          ${r.detail ? `<p class="req__detail">${esc(r.detail)}</p>` : ""}
+        </div>
+      </article>`).join("");
+    $("#requirementsSummary").textContent = requirementsSummary;
+  }
+
+  function renderBenefits() {
+    $("#benefitsGrid").innerHTML = benefits.map((b) =>
+      `<article class="benefit reveal">${icon(b.icon)}<h3>${esc(b.title)}</h3></article>`).join("");
+  }
+
+  function renderPricing() {
+    const sec = $("#valores");
+    if (!pricing || !pricing.show) { sec.hidden = true; $$('a[href="#valores"]').forEach((a) => a.closest("li")?.remove()); return; }
+    $$("[data-price]", sec).forEach((el) => { el.textContent = pricing[el.dataset.price] || ""; });
+    $("#pricingList").innerHTML = benefits.slice(0, 5).map((b) =>
+      `<li>${icon("check")} ${esc(b.title)}</li>`).join("");
+  }
+
   /* ---------------- Testemunhos e FAQ ---------------- */
   function renderTestimonials() {
+    if (!testimonials.length) { $("#depoimentos").hidden = true; return; }
     $("#testimonialsGrid").innerHTML = testimonials.map((t, i) => `
       <figure class="testimonial reveal ${t.placeholder ? "testimonial--placeholder" : ""}" style="margin:0">
         ${t.placeholder ? `<span class="badge-draft">Provisório</span>` : ""}
@@ -450,6 +503,10 @@
   bindWhatsApp();
   initHeader();
   initCourses();
+  renderSteps();
+  renderRequirements();
+  renderBenefits();
+  renderPricing();
   renderTestimonials();
   renderFaq();
   initModal();
