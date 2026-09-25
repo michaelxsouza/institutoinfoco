@@ -497,3 +497,32 @@ body.modal-open { overflow: hidden; }
   .hero__media img { aspect-ratio: 720 / 1279; -webkit-mask-image: none; mask-image: none; border-radius: 28px; box-shadow: var(--shadow-lg); }
 }
 @media (max-width: 640px) { .hero__media img { border-radius: 22px; } }
+
+/* ---------- Hero animado ---------- */
+/* 1. Entrada em sequência do texto */
+.hero__content > * { animation: heroUp .8s var(--ease) both; }
+.hero__content > :nth-child(1) { animation-delay: .05s; }
+.hero__content > :nth-child(2) { animation-delay: .15s; }
+.hero__content > :nth-child(3) { animation-delay: .3s; }
+.hero__content > :nth-child(4) { animation-delay: .45s; }
+@keyframes heroUp { from { opacity: 0; transform: translateY(24px); } }
+
+/* Sublinhado da palavra "transforma" desenhado da esquerda para a direita */
+.hero__title .hl::after { transform-origin: left center; animation: heroLine .9s var(--ease) .75s both; }
+@keyframes heroLine { from { transform: scaleX(0); } }
+
+/* 2. Imagem: entrada com zoom + flutuação contínua */
+.hero__media { isolation: isolate; animation: heroImgIn 1.1s var(--ease) .25s both; translate: var(--hx, 0px) var(--hy, 0px); transition: translate .6s var(--ease); }
+.hero__media img { animation: heroFloat 7s ease-in-out 1.4s infinite; will-change: transform; }
+@keyframes heroImgIn { from { opacity: 0; transform: scale(.94) translateY(24px); } }
+@keyframes heroFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+/* 4. Brilho azul pulsando atrás da imagem */
+.hero__media::before {
+  content: ""; position: absolute; z-index: -1; inset: 12% 8% 8% 18%; border-radius: 50%;
+  background: radial-gradient(circle, rgba(30, 123, 255, .35), transparent 65%);
+  filter: blur(30px); animation: heroGlow 6s ease-in-out infinite;
+}
+@keyframes heroGlow { 0%, 100% { opacity: .55; transform: scale(.95); } 50% { opacity: 1; transform: scale(1.05); } }
+
+@media (prefers-reduced-motion: reduce) { .hero__media { translate: none; } }

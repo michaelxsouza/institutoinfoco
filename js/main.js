@@ -419,6 +419,30 @@
     }));
   }
 
+  /* ---------------- Hero: movimento com o mouse (somente desktop) ---------------- */
+  function initHeroParallax() {
+    const hero = $(".hero"), media = $(".hero__media");
+    if (!hero || !media) return;
+    const fine = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 1101px)");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let raf = 0;
+    hero.addEventListener("mousemove", (e) => {
+      if (!fine.matches || reduce.matches) return;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r = hero.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        media.style.setProperty("--hx", `${(x * -18).toFixed(1)}px`);
+        media.style.setProperty("--hy", `${(y * -14).toFixed(1)}px`);
+      });
+    });
+    hero.addEventListener("mouseleave", () => {
+      media.style.setProperty("--hx", "0px");
+      media.style.setProperty("--hy", "0px");
+    });
+  }
+
   /* ---------------- Inicialização ---------------- */
   document.documentElement.classList.remove("no-js");
   hydrateIcons();
@@ -432,4 +456,5 @@
   initForms();
   hydrateIcons();
   initReveal();
+  initHeroParallax();
 })();
