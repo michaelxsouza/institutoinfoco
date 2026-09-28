@@ -43,7 +43,8 @@
         <ul class="nav__list">
           <li><a href="#inicio" class="nav__link">Início</a></li>
           <li><a href="#sobre" class="nav__link">Sobre</a></li>
-          <li><a href="#cursos" class="nav__link">Cursos</a></li>
+          <li><a href="#cursos" class="nav__link">Por Competência</a></li>
+          <li><a href="#tecnicos-regulares" class="nav__link">Técnico Regular</a></li>
           <li><a href="#como-funciona" class="nav__link">Como funciona</a></li>
           <li><a href="#requisitos" class="nav__link">Requisitos</a></li>
           <li><a href="#valores" class="nav__link">Valores</a></li>
@@ -129,9 +130,9 @@
     <section class="section section--soft" id="cursos">
       <div class="container">
         <header class="section__head reveal">
-          <span class="eyebrow">Cursos</span>
+          <span class="eyebrow">Técnico por Competência</span>
           <h2 class="title">Encontre a formação ideal para você</h2>
-          <p class="lead">São 25 cursos técnicos em 10 áreas, para quem já atua na profissão e quer o diploma. Pesquise pelo nome ou filtre por área.</p>
+          <p class="lead">São <span data-count="courses">53</span> cursos técnicos em <span data-count="areas">7</span> áreas, para quem já atua na profissão e quer o diploma. Pesquise pelo nome ou filtre por área.</p>
         </header>
 
         <div class="courses__toolbar reveal">
@@ -152,6 +153,25 @@
           <p>Nenhum curso encontrado. Não encontrou o que procura?</p>
           <a href="#" class="btn btn--primary js-wa" data-wa-msg="Olá! Não encontrei o curso que procuro no site. Podem me ajudar?">Pergunte pelo WhatsApp</a>
         </div>
+      </div>
+    </section>
+
+    <!-- ============ TÉCNICOS REGULARES ============ -->
+    <section class="section" id="tecnicos-regulares">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="eyebrow">Técnico Regular</span>
+          <h2 class="title">Ainda não tem experiência? Faça o curso técnico completo</h2>
+          <p class="lead">Cursos técnicos regulares de 8 a 14 meses para quem quer entrar em uma nova área. Veja os mais procurados ou a lista completa com <span data-count="regular">60</span> cursos.</p>
+          <p class="reg-price" id="regularPriceNote"></p>
+        </header>
+
+        <div class="courses__grid" id="regularFeatured"></div>
+
+        <div class="courses__more">
+          <button type="button" class="btn btn--outline btn--lg" id="regularToggle" aria-expanded="false" aria-controls="regularAll"><span class="btn__label">Ver todos os técnicos regulares</span></button>
+        </div>
+        <div class="reg-all" id="regularAll" hidden></div>
       </div>
     </section>
 
@@ -203,7 +223,7 @@
         <div class="pricing__intro reveal">
           <span class="eyebrow">Valores</span>
           <h2 class="title">Seu diploma técnico com 40% de desconto</h2>
-          <p class="lead">Um único valor para qualquer um dos 25 cursos técnicos. Tire suas dúvidas e garanta a condição pelo WhatsApp.</p>
+          <p class="lead">Um único valor para qualquer curso do Técnico por Competência. Tire suas dúvidas e garanta a condição pelo WhatsApp.</p>
           <ul class="pricing__list" id="pricingList"></ul>
         </div>
         <div class="price-card reveal" id="priceCard">

@@ -106,6 +106,9 @@
       case "experiencia":
         if (!v) msg = "Selecione seu tempo de experiência.";
         break;
+      case "inicio":
+        if (!v) msg = "Selecione quando pretende começar.";
+        break;
       case "consentimento":
         if (!v) msg = "É necessário autorizar o contato para enviar.";
         break;
@@ -132,14 +135,18 @@
     gtagSafe("event", "form_start", { course: LP.course });
   });
 
+  const isRegular = LP.program === "regular";
   function waMessage(d) {
     return [
-      `Olá! Tenho interesse no *${LP.course}* por Competência.`,
+      isRegular
+        ? `Olá! Tenho interesse no *${LP.course}* (curso técnico regular).`
+        : `Olá! Tenho interesse no *${LP.course}* por Competência.`,
       ``,
       `*Nome:* ${d.nome}`,
       `*Ensino Médio:* ${d.escolaridade}`,
-      `*Experiência na área:* ${d.experiencia}`
-    ].join("\n");
+      d.experiencia ? `*Experiência na área:* ${d.experiencia}` : "",
+      d.inicio ? `*Quando quer começar:* ${d.inicio}` : ""
+    ].filter((l, i) => l || i === 1).join("\n");
   }
 
   async function send(payload) {
@@ -148,7 +155,7 @@
       const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(LP.email)}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ ...payload, _subject: `Novo lead (${LP.course}) — Instituto Infoco`, _template: "table", _captcha: "false" })
+        body: JSON.stringify({ ...payload, _subject: `Novo lead (${payload.curso}) — Instituto Infoco`, _template: "table", _captcha: "false" })
       });
       const json = await res.json().catch(() => ({}));
       if (!res.ok || String(json.success) === "false") throw new Error(json.message || "Falha no envio");
@@ -169,14 +176,16 @@
 
     const fd = new FormData(form);
     const data = {
-      curso: LP.course,
+      curso: isRegular ? `${LP.course} (Regular)` : LP.course,
+      modalidade: isRegular ? "Técnico Regular" : "Técnico por Competência",
       nome: fd.get("nome").trim(),
       whatsapp: fd.get("whatsapp").trim(),
       email: fd.get("email").trim(),
       escolaridade: fd.get("escolaridade"),
-      experiencia: fd.get("experiencia"),
+      ...(fd.has("experiencia") ? { experiencia: fd.get("experiencia") } : {}),
+      ...(fd.has("inicio") ? { inicio: fd.get("inicio") } : {}),
       consentimento: "Sim",
-      origem: "LP " + LP.course,
+      origem: "LP " + (isRegular ? "Regular " : "") + LP.course,
       pagina: location.origin + location.pathname,
       data_envio: new Date().toLocaleString("pt-BR"),
       ...tracking
@@ -198,7 +207,7 @@
     }
 
     try {
-      sessionStorage.setItem("infoco_lead", JSON.stringify({ curso: LP.course, wa: waMessage(data), t: Date.now() }));
+      sessionStorage.setItem("infoco_lead", JSON.stringify({ curso: data.curso, wa: waMessage(data), t: Date.now() }));
     } catch (err) { /* ignore */ }
     location.href = LP.thankYouUrl;
   });

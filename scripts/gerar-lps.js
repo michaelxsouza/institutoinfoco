@@ -336,6 +336,258 @@ ${footer(rel)}
 `;
 }
 
+/* ---------- LP de um Técnico Regular ---------- */
+const R = S.regularCourses || { show: false, categories: [] };
+const RP = R.pricing || { show: false };
+const regularList = [];
+R.categories.forEach((cat) => cat.courses.forEach((name) => {
+  if (regularList.find((c) => c.name === name)) return;
+  regularList.push({ name, category: cat.name, slug: S.slugify(name) });
+}));
+
+function regularLpPage(course) {
+  const rel = "../../";
+  const det = S.courseDetails[course.name] || { about: "", workplaces: [] };
+  const waMsg = RP.show
+    ? `Olá! Tenho interesse no ${course.name} (curso técnico regular) com ${RP.discountLabel.toLowerCase()}.`
+    : `Olá! Tenho interesse no ${course.name} (curso técnico regular). Gostaria de saber valores e condições.`;
+  const url = LPS.siteUrl ? `${LPS.siteUrl}/tecnico-regular/${course.slug}/` : "";
+  const title = `${course.name} | Curso técnico de ${R.duration} | Instituto Infoco`;
+  const description = `Faça o ${course.name} e comece uma nova profissão. Curso técnico completo de ${R.duration}, sem precisar de experiência na área. Diploma com validade nacional.`;
+  const others = regularList.filter((c) => c.category === course.category && c.name !== course.name);
+  const comp = S.courses.find((c) => c.name === course.name);
+  const lpData = {
+    course: course.name,
+    program: "regular",
+    whatsapp: C.whatsapp,
+    email: C.email,
+    waMessage: waMsg,
+    formSettings: S.formSettings,
+    tracking: T,
+    thankYouUrl: `${rel}obrigado/?curso=${course.slug}&tipo=regular`
+  };
+  const img = hasImage(course.slug) ? `assets/img/cursos/${course.slug}.webp` : "";
+  const ogImage = img && LPS.siteUrl ? `${LPS.siteUrl}/${img}` : "";
+  const hl = R.highlights || [];
+  const hlIcons = ["clock", "cap", "shield", "globe"];
+
+  return `${head({ title, description, rel, canonical: url, image: ogImage })}
+<body class="lp">
+${header(rel, waMsg)}
+
+  <main>
+    <!-- ============ TOPO + FORMULÁRIO ============ -->
+    <section class="lp-hero${img ? " lp-hero--img" : ""}"${img ? ` style="--hero-img: url('${rel}${img}')"` : ""}>
+      <div class="container lp-hero__grid">
+        <div class="lp-hero__content">
+          <span class="lp-kicker">${esc(course.category)} · Técnico Regular</span>
+          <h1>${esc(course.name)} <span>curso técnico completo em ${esc(R.duration)}</span></h1>
+          <p class="lp-hero__sub">Quer começar uma nova profissão? Faça o ${esc(course.name)} e conquiste o seu diploma de técnico, mesmo sem experiência na área.</p>
+        </div>
+        <div class="lp-hero__extra">
+          <ul class="lp-checks">
+${hl.map((h, i) => `            <li>${ic(hlIcons[i] || "check")} ${esc(h)}</li>`).join("\n")}
+          </ul>
+          ${RP.show ? `<div class="lp-price">
+            <span class="lp-price__badge">${esc(RP.discountLabel)}</span>
+            <span class="lp-price__old">de <s>${esc(RP.oldPrice)}</s></span>
+            <span class="lp-price__now">por <strong>${esc(RP.price)}</strong></span>
+            ${RP.installments ? `<span class="lp-price__inst">${esc(RP.installments)}</span>` : ""}
+          </div>` : ""}
+        </div>
+
+        <div class="lp-form-card" id="formulario">
+          <h2>Quero fazer o ${esc(course.name)}</h2>
+          <p class="lp-form-card__sub">${RP.show ? `Por ${esc(RP.price)} (${esc(RP.installments.replace(/^ou /, ""))}). Preencha e receba as orientações pelo WhatsApp.` : "Preencha e receba valores e condições pelo WhatsApp."}</p>
+          <form id="lpForm" class="lead-form" novalidate>
+            <div class="field">
+              <label for="lp-nome">Nome completo <em>*</em></label>
+              <input id="lp-nome" name="nome" type="text" autocomplete="name" required placeholder="Seu nome completo" />
+              <small class="field__error" aria-live="polite"></small>
+            </div>
+            <div class="field">
+              <label for="lp-whats">WhatsApp <em>*</em></label>
+              <input id="lp-whats" name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel" required placeholder="(00) 9 0000-0000" />
+              <small class="field__error" aria-live="polite"></small>
+            </div>
+            <div class="field">
+              <label for="lp-email">E-mail <em>*</em></label>
+              <input id="lp-email" name="email" type="email" autocomplete="email" required placeholder="seu@email.com" />
+              <small class="field__error" aria-live="polite"></small>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="lp-escolaridade">Ensino Médio <em>*</em></label>
+                <select id="lp-escolaridade" name="escolaridade" required>
+                  <option value="">Selecione</option>
+                  <option>Completo</option>
+                  <option>Cursando</option>
+                  <option>Incompleto</option>
+                </select>
+                <small class="field__error" aria-live="polite"></small>
+              </div>
+              <div class="field">
+                <label for="lp-inicio">Quando quer começar? <em>*</em></label>
+                <select id="lp-inicio" name="inicio" required>
+                  <option value="">Selecione</option>
+                  <option>O quanto antes</option>
+                  <option>Nos próximos 3 meses</option>
+                  <option>Ainda estou pesquisando</option>
+                </select>
+                <small class="field__error" aria-live="polite"></small>
+              </div>
+            </div>
+            <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <div class="field field--check">
+              <label class="check">
+                <input type="checkbox" name="consentimento" required />
+                <span class="check__box" aria-hidden="true"></span>
+                <span>Autorizo o Instituto Infoco a entrar em contato comigo sobre cursos e serviços educacionais. <a href="${rel}politica-de-privacidade/" target="_blank" rel="noopener">Política de Privacidade</a></span>
+              </label>
+              <small class="field__error" aria-live="polite"></small>
+            </div>
+            <button type="submit" class="btn btn--primary btn--lg btn--block">
+              <span class="btn__label">${RP.show ? "Quero garantir o desconto" : "Quero receber valores e condições"}</span>
+              <span class="spinner" aria-hidden="true"></span>
+            </button>
+            <p class="form-note">${ic("lock")} Seus dados são usados apenas para retornar o seu contato.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SOBRE A PROFISSÃO ============ -->
+    <section class="lp-section">
+      <div class="container lp-about${img ? " lp-about--img" : ""}">
+        ${img ? `<figure class="lp-about__img"><img src="${rel}${img}" width="1200" height="800" loading="lazy" alt="Profissional ${esc(course.name.replace(/^Técnico/, "técnico"))} trabalhando" /></figure>` : ""}
+        <div class="lp-about__text">
+          <span class="eyebrow">Sobre a profissão</span>
+          <h2 class="title">O que faz o ${esc(course.name)}</h2>
+          <p class="lead">${esc(det.about)}</p>
+          ${det.workplaces.length ? `<div class="lp-work">
+            <h3>Onde atuar</h3>
+            <ul>${det.workplaces.map((w) => `<li>${ic("pin")} ${esc(w)}</li>`).join("")}</ul>
+          </div>` : ""}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COMO FUNCIONA ============ -->
+    <section class="lp-section lp-section--soft">
+      <div class="container">
+        <header class="section__head">
+          <span class="eyebrow">Como funciona</span>
+          <h2 class="title">Da inscrição ao diploma, em 4 etapas</h2>
+        </header>
+        <ol class="lp-steps">
+${(R.steps || []).map((st, i) => `          <li><span class="lp-steps__n">${i + 1}</span><div><h3>${esc(st.title)}</h3><p>${esc(st.text)}</p></div></li>`).join("\n")}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ REQUISITOS ============ -->
+    <section class="lp-section">
+      <div class="container">
+        <header class="section__head">
+          <span class="eyebrow">Requisitos</span>
+          <h2 class="title">Quem pode fazer</h2>
+        </header>
+        <div class="reqs">
+${(R.requirements || []).map((r, i) => `          <article class="req">
+            <span class="req__icon">${ic(r.icon)}</span>
+            <div>
+              <span class="req__n">Requisito ${i + 1}</span>
+              <h3>${esc(r.title)}</h3>
+              <p>${esc(r.text)}</p>
+            </div>
+          </article>`).join("\n")}
+        </div>
+        <div class="lp-center">
+          <a href="#formulario" class="btn btn--primary btn--lg js-to-form">Quero fazer minha inscrição ${ic("arrow")}</a>
+        </div>
+      </div>
+    </section>
+
+    ${RP.show ? `<!-- ============ VALORES ============ -->
+    <section class="lp-section lp-section--soft">
+      <div class="container pricing">
+        <div class="pricing__intro">
+          <span class="eyebrow">Valores</span>
+          <h2 class="title">${esc(course.name)} com ${esc(RP.discountLabel.toLowerCase())}</h2>
+          <ul class="pricing__list">
+${hl.map((h) => `            <li>${ic("check")} ${esc(h)}</li>`).join("\n")}
+          </ul>
+        </div>
+        <div class="price-card">
+          <span class="price-card__badge">${esc(RP.discountLabel)}</span>
+          <p class="price-card__program">${esc(course.name)} · Técnico Regular</p>
+          <p class="price-card__old">de <s>${esc(RP.oldPrice)}</s></p>
+          <p class="price-card__now"><small>por</small> <strong>${esc(RP.price)}</strong></p>
+          ${RP.installments ? `<p class="price-card__inst">${esc(RP.installments)}</p>` : ""}
+          <p class="price-card__note">${esc(RP.note)}</p>
+          <a href="#formulario" class="btn btn--primary btn--lg btn--block js-to-form">Quero garantir o desconto</a>
+          <a href="#" class="btn btn--whatsapp btn--lg btn--block js-wa" data-wa-msg="${esc(waMsg)}">${ic("whatsapp")} Falar pelo WhatsApp</a>
+        </div>
+      </div>
+    </section>` : ""}
+
+    ${comp ? `<!-- ============ JÁ TEM EXPERIÊNCIA? ============ -->
+    <section class="lp-section">
+      <div class="container lp-cross">
+        <div>
+          <span class="eyebrow">Já trabalha na área?</span>
+          <h2 class="title">Tenha o diploma de ${esc(course.name)} em até 48 horas úteis</h2>
+          <p class="lead">Se você já tem experiência comprovada, pode fazer o Técnico por Competência: avaliação online e diploma reconhecido pelo MEC.</p>
+        </div>
+        <a href="${rel}cursos/${comp.slug}/" class="btn btn--outline btn--lg">Ver Técnico por Competência ${ic("arrow")}</a>
+      </div>
+    </section>` : ""}
+
+    <!-- ============ FAQ ============ -->
+    <section class="lp-section${comp ? " lp-section--soft" : ""}">
+      <div class="container lp-faq">
+        <header class="section__head">
+          <span class="eyebrow">Dúvidas frequentes</span>
+          <h2 class="title">Perguntas frequentes</h2>
+        </header>
+        <div class="accordion">
+${(R.faqs || []).map((f, i) => `          <div class="acc">
+            <h3 style="margin:0;font-size:inherit"><button type="button" class="acc__btn" id="faq-b-${i}" aria-expanded="false" aria-controls="faq-p-${i}"><span>${esc(f.q)}</span><span class="acc__icon" aria-hidden="true"></span></button></h3>
+            <div class="acc__panel" id="faq-p-${i}" role="region" aria-labelledby="faq-b-${i}"><div><p>${esc(f.a)}</p></div></div>
+          </div>`).join("\n")}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CHAMADA FINAL ============ -->
+    <section class="lp-final">
+      <div class="container lp-final__inner">
+        <h2>Comece agora a sua carreira como ${esc(course.name.replace(/^Técnico/, "técnico"))}</h2>
+        <p>${RP.show ? `Por ${esc(RP.price)} ou ${esc(RP.installments.replace(/^ou /, ""))}. Envie seus dados e garanta o desconto.` : "Envie seus dados e receba valores e condições pelo WhatsApp."}</p>
+        <div class="lp-final__actions">
+          <a href="#formulario" class="btn btn--white btn--lg js-to-form">Quero me inscrever</a>
+          <a href="#" class="btn btn--ghost-white btn--lg js-wa" data-wa-msg="${esc(waMsg)}">${ic("whatsapp")} Falar pelo WhatsApp</a>
+        </div>
+        ${others.length ? `<p class="lp-others">Outros técnicos regulares em ${esc(course.category)}: ${others.map((o) => `<a href="../${o.slug}/">${esc(o.name)}</a>`).join(" · ")}</p>` : ""}
+      </div>
+    </section>
+  </main>
+
+${footer(rel)}
+
+  <!-- Barra fixa no celular -->
+  <div class="lp-bar">
+    <a href="#formulario" class="btn btn--primary js-to-form">Quero me inscrever</a>
+    <a href="#" class="btn btn--whatsapp js-wa" data-wa-msg="${esc(waMsg)}" aria-label="Falar pelo WhatsApp">${ic("whatsapp")}</a>
+  </div>
+
+  <script>window.LP = ${JSON.stringify(lpData)};</script>
+  <script src="${rel}js/lp.js"></script>
+</body>
+</html>
+`;
+}
+
 /* ---------- Página de agradecimento ---------- */
 function thankYouPage() {
   const rel = "../";
@@ -424,6 +676,16 @@ function write(rel, content) {
 }
 
 S.courses.forEach((c) => write(`cursos/${c.slug}/index.html`, lpPage(c)));
+if (R.show) regularList.forEach((c) => write(`tecnico-regular/${c.slug}/index.html`, regularLpPage(c)));
+// Remove páginas de cursos que saíram da lista
+const cleanup = (dir, keep) => {
+  const full = path.join(ROOT, dir);
+  if (!fs.existsSync(full)) return [];
+  return fs.readdirSync(full, { withFileTypes: true })
+    .filter((d) => d.isDirectory() && !keep.includes(d.name) && fs.existsSync(path.join(full, d.name, "index.html")))
+    .map((d) => { fs.rmSync(path.join(full, d.name), { recursive: true, force: true }); return `${dir}/${d.name}`; });
+};
+const removed = cleanup("cursos", S.courses.map((c) => c.slug)).concat(cleanup("tecnico-regular", R.show ? regularList.map((c) => c.slug) : []));
 
 // Lista dos cursos que têm imagem, usada pelos cards do site principal
 const withImg = S.courses.filter((c) => hasImage(c.slug)).map((c) => c.slug);
@@ -434,15 +696,20 @@ write("politica-de-privacidade/index.html", privacyPage());
 
 // Lista de URLs para colar nos anúncios
 const base = LPS.siteUrl || "https://SEU-DOMINIO";
-const lines = ["Curso;Área;URL da página"].concat(S.courses.map((c) => `${c.name};${c.category};${base}/cursos/${c.slug}/`));
+const lines = ["Tipo;Curso;Área;URL da página"]
+  .concat(S.courses.map((c) => `Técnico por Competência;${c.name};${c.category};${base}/cursos/${c.slug}/`))
+  .concat(R.show ? regularList.map((c) => `Técnico Regular;${c.name};${c.category};${base}/tecnico-regular/${c.slug}/`) : []);
 write("cursos/lista-de-urls.csv", "﻿" + lines.join("\n") + "\n");
 
 if (LPS.siteUrl) {
-  const urls = [`${LPS.siteUrl}/`].concat(S.courses.map((c) => `${LPS.siteUrl}/cursos/${c.slug}/`));
+  const urls = [`${LPS.siteUrl}/`].concat(S.courses.map((c) => `${LPS.siteUrl}/cursos/${c.slug}/`))
+    .concat(R.show ? regularList.map((c) => `${LPS.siteUrl}/tecnico-regular/${c.slug}/`) : []);
   write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${u}</loc></url>`).join("\n")}\n</urlset>\n`);
 }
 
 console.log(`✔ ${S.courses.length} páginas de curso geradas em cursos/`);
+if (R.show) console.log(`✔ ${regularList.length} páginas de Técnico Regular geradas em tecnico-regular/`);
+if (removed.length) console.log("✔ Páginas removidas (curso saiu da lista): " + removed.join(", "));
 console.log("✔ obrigado/ e politica-de-privacidade/ geradas");
 console.log(`✔ ${withImg.length} cursos com imagem`);
 if (missing.length) console.log("ℹ Sem imagem (usam o ícone): " + missing.map((m) => `assets/img/cursos/${m}.webp`).join(", "));

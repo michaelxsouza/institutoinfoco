@@ -5,7 +5,7 @@
 (function () {
   "use strict";
 
-  const { instituteContact: C, formSettings, courses, faqs, testimonials, pricing, steps, requirements, requirementsSummary, benefits } = window.SITE;
+  const { instituteContact: C, formSettings, courses, courseCategories, regularCourses, faqs, testimonials, pricing, steps, requirements, requirementsSummary, benefits } = window.SITE;
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -128,11 +128,12 @@
 
   /* ---------------- Cursos ---------------- */
   const state = { q: "", cat: "Todos" };
+  const inCat = (c, cat) => (c.categories || [c.category]).includes(cat);
   const norm = (s) => String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 
   function renderFilters() {
-    const cats = ["Todos", ...new Set(courses.map((c) => c.category).filter(Boolean))];
-    const count = (c) => c === "Todos" ? courses.length : courses.filter((x) => x.category === c).length;
+    const cats = ["Todos", ...courseCategories.map((c) => c.name)];
+    const count = (c) => c === "Todos" ? courses.length : courses.filter((x) => inCat(x, c)).length;
     $("#courseFilters").innerHTML = cats.map((c) =>
       `<button type="button" class="chip" data-cat="${esc(c)}" aria-pressed="${c === state.cat}">${esc(c)} <span class="chip__n">${count(c)}</span></button>`).join("");
   }
@@ -143,11 +144,14 @@
 
   function renderCourses() {
     const list = courses.filter((c) =>
-      (state.cat === "Todos" || c.category === state.cat) &&
+      (state.cat === "Todos" || inCat(c, state.cat)) &&
       (!state.q || norm(c.name).includes(norm(state.q)) || norm(c.category).includes(norm(state.q))));
+    // Na visão inicial, os cursos com foto aparecem primeiro
+    if (state.cat === "Todos" && !state.q) list.sort((x, y) => COURSE_IMG.has(y.slug) - COURSE_IMG.has(x.slug));
     const limited = !showAll && state.cat === "Todos" && !state.q && list.length > INITIAL_COURSES;
     const visible = limited ? list.slice(0, INITIAL_COURSES) : list;
     $("#coursesGrid").innerHTML = visible.map((c) => {
+      const catLabel = state.cat !== "Todos" && inCat(c, state.cat) ? state.cat : c.category;
       const i = courses.indexOf(c);
       const meta = [
         c.duration ? `<span class="tag">${icon("clock")} ${esc(c.duration)}</span>` : "",
@@ -160,7 +164,7 @@
         <div class="course__head">
           <span class="course__icon">${icon(c.icon)}</span>
           <div>
-            ${c.category ? `<span class="course__cat">${esc(c.category)}</span>` : ""}
+            ${catLabel ? `<span class="course__cat">${esc(catLabel)}</span>` : ""}
             <h3>${esc(c.name)}</h3>
           </div>
         </div>
@@ -177,14 +181,25 @@
   }
 
   function fillCourseSelects() {
+    const regular = regularCourses && regularCourses.show
+      ? [...new Set(regularCourses.categories.flatMap((c) => c.courses))].sort((a, b) => a.localeCompare(b, "pt-BR"))
+      : [];
     const opts = [`<option value="">Selecione uma opção</option>`,
+      `<optgroup label="Técnico por Competência (já tenho experiência)">`,
       ...courses.map((c) => `<option value="${esc(c.name)}">${esc(c.name)}</option>`),
+      `</optgroup>`,
+      ...(regular.length ? [`<optgroup label="Técnico Regular (curso completo)">`,
+        ...regular.map((n) => `<option value="${esc(n)} (Regular)">${esc(n)}</option>`),
+        `</optgroup>`] : []),
       `<option value="Ainda não sei / Quero orientação">Ainda não sei / Quero orientação</option>`,
       `<option value="Outro curso ou área">Outro curso ou área</option>`].join("");
     $$(".js-course-select").forEach((s) => (s.innerHTML = opts));
   }
 
   function initCourses() {
+    $$("[data-count]").forEach((el) => {
+      el.textContent = { courses: courses.length, areas: courseCategories.length, regular: regularCourses ? regularCourses.total : "" }[el.dataset.count] ?? "";
+    });
     renderFilters(); renderCourses(); fillCourseSelects();
     let t;
     $("#courseSearch").addEventListener("input", (e) => {
@@ -203,15 +218,62 @@
     });
   }
 
+  /* ---------------- Técnicos Regulares ---------------- */
+  function initRegular() {
+    const sec = $("#tecnicos-regulares");
+    if (!sec) return;
+    if (!regularCourses || !regularCourses.show) { sec.hidden = true; $$('a[href="#tecnicos-regulares"]').forEach((a) => a.closest("li")?.remove()); return; }
+    const R = regularCourses;
+    const RP = R.pricing || { show: false };
+    if (RP.show) $("#regularPriceNote").innerHTML = `${esc(RP.discountLabel)}: de <s>${esc(RP.oldPrice)}</s> por <strong>${esc(RP.price)}</strong> ${esc(RP.installments)}.`;
+    $("#regularFeatured").innerHTML = R.featured.map((c, i) => `
+      <article class="course course--regular">
+        <div class="course__head">
+          <span class="course__icon">${icon(c.icon)}</span>
+          <div>
+            <span class="course__cat">Técnico Regular · <span class="course__hot">${i < 3 ? "Mais procurado" : "Em alta"}</span></span>
+            <h3>${esc(c.name)}</h3>
+          </div>
+        </div>
+        <div class="course__meta"><span class="tag">${icon("clock")} ${esc(R.duration)}</span><span class="tag">${icon("cap")} Curso completo</span></div>
+        ${RP.show ? `<p class="course__price"><s>${esc(RP.oldPrice)}</s> <strong>${esc(RP.price)}</strong> <small>${esc(RP.installments)}</small></p>` : ""}
+        <div class="course__actions">
+          <button type="button" class="btn btn--primary js-regular" data-name="${esc(c.name)}">Tenho interesse ${icon("arrow")}</button>
+          <a class="course__link" href="tecnico-regular/${window.SITE.slugify(c.name)}/">Ver detalhes do curso</a>
+        </div>
+      </article>`).join("");
+    $("#regularAll").innerHTML = R.categories.map((cat) => `
+      <div class="reg-area">
+        <h4>${icon(cat.icon)} ${esc(cat.name)} <span class="chip__n">${cat.courses.length}</span></h4>
+        <ul>${cat.courses.map((n) => `<li><a class="reg-item" href="tecnico-regular/${window.SITE.slugify(n)}/">${esc(n.replace(/^Técnico em /, ""))}</a></li>`).join("")}</ul>
+      </div>`).join("");
+    sec.addEventListener("click", (e) => {
+      const b = e.target.closest(".js-regular"); if (!b) return;
+      openModal({ name: b.dataset.name }, b, { regular: true });
+    });
+    const tgl = $("#regularToggle"), all = $("#regularAll");
+    tgl.addEventListener("click", () => {
+      const open = all.hidden;
+      all.hidden = !open;
+      tgl.setAttribute("aria-expanded", String(open));
+      tgl.querySelector(".btn__label").textContent = open ? "Ocultar lista completa" : `Ver todos os ${R.total} técnicos regulares`;
+    });
+    tgl.querySelector(".btn__label").textContent = `Ver todos os ${R.total} técnicos regulares`;
+  }
+
   /* ---------------- Modal ---------------- */
   const modal = $("#interestModal");
   let lastFocus = null;
-  function openModal(course, trigger) {
+  function openModal(course, trigger, opts = {}) {
     lastFocus = trigger || document.activeElement;
     resetForm($("#modalForm"));
     $("#modalCourseName").textContent = course.name;
-    $("#modalPrice").textContent = pricing && pricing.show ? pricing.price : "";
-    $("#m-curso").value = course.name;
+    const rp = regularCourses && regularCourses.pricing;
+    $("#modalPrice").textContent = opts.regular
+      ? (rp && rp.show ? rp.price : "")
+      : (pricing && pricing.show ? pricing.price : "");
+    $("#modalPrice").hidden = !$("#modalPrice").textContent;
+    $("#m-curso").value = opts.regular ? `${course.name} (Regular)` : course.name;
     modal.hidden = false;
     document.body.classList.add("modal-open");
     setTimeout(() => $("#m-nome").focus(), 60);
@@ -509,6 +571,8 @@
   bindWhatsApp();
   initHeader();
   initCourses();
+  initRegular();
+  bindWhatsApp();
   renderSteps();
   renderRequirements();
   renderBenefits();

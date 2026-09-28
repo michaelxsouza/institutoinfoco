@@ -19,7 +19,8 @@ assets/img/             → logotipo oficial e favicon
 ## Como editar o conteúdo (js/config.js)
 
 - **Contatos** → objeto `instituteContact`. Cole o link da página do Facebook em `facebookUrl` para ativar o ícone.
-- **Cursos** → array `courses`. Copie um bloco `{ ... }` para adicionar. Deixe `duration` / `modality` como `""` para ocultar dados não confirmados. Os filtros por categoria são gerados automaticamente.
+- **Cursos por Competência** → array `courseCategories` (nome da área + lista de cursos). Um curso pode estar em mais de uma área. Os filtros por área são gerados automaticamente.
+- **Técnicos Regulares** → objeto `regularCourses` (`featured` = mais procurados; `categories` = lista completa). Use `show: false` para esconder a seção.
 - **Perguntas frequentes** → array `faqs`.
 - **Depoimentos** → array `testimonials`. Use apenas depoimentos reais e autorizados; defina `placeholder: false` para remover o selo "Provisório".
 
@@ -43,7 +44,8 @@ Cada curso tem uma página própria em `cursos/<nome-do-curso>/`, feita para rec
 sem menu, formulário no topo, preço, etapas, requisitos, FAQ e botão fixo no celular.
 
 - **Gerar / atualizar as páginas:** depois de mudar qualquer coisa em `js/config.js`, rode
-  `node scripts/gerar-lps.js`. As 25 páginas, `obrigado/` e `politica-de-privacidade/` são recriadas.
+  `node scripts/gerar-lps.js`. São recriadas as páginas do Técnico por Competência (`cursos/<curso>/`), dos Técnicos Regulares (`tecnico-regular/<curso>/`), `obrigado/` e `politica-de-privacidade/`. Páginas de cursos que saíram da lista são apagadas automaticamente.
+- **Técnico Regular:** textos das páginas (destaques, etapas, requisitos e FAQ) ficam em `regularCourses` no `js/config.js`. O formulário pergunta Ensino Médio e quando a pessoa quer começar; o lead chega marcado como "(Regular)".
 - **URLs para os anúncios:** ficam em `cursos/lista-de-urls.csv` (abre no Excel).
   Preencha `lpSettings.siteUrl` para a lista sair com o domínio certo.
 - **Texto de cada profissão:** `courseDetails` em `js/config.js`.

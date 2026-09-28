@@ -1,26 +1,114 @@
-﻿Curso;Área;URL da página
-Técnico em Administração;Gestão e Negócios;https://SEU-DOMINIO/cursos/tecnico-em-administracao/
-Técnico em Contabilidade;Gestão e Negócios;https://SEU-DOMINIO/cursos/tecnico-em-contabilidade/
-Técnico em Logística;Gestão e Negócios;https://SEU-DOMINIO/cursos/tecnico-em-logistica/
-Técnico em Secretaria Escolar;Gestão e Negócios;https://SEU-DOMINIO/cursos/tecnico-em-secretaria-escolar/
-Técnico em Transações Imobiliárias;Gestão e Negócios;https://SEU-DOMINIO/cursos/tecnico-em-transacoes-imobiliarias/
-Técnico em Desenvolvimento de Sistemas;Informação e Comunicação;https://SEU-DOMINIO/cursos/tecnico-em-desenvolvimento-de-sistemas/
-Técnico em Informática para Internet;Informação e Comunicação;https://SEU-DOMINIO/cursos/tecnico-em-informatica-para-internet/
-Técnico em Automação Industrial;Controle e Processos Industriais;https://SEU-DOMINIO/cursos/tecnico-em-automacao-industrial/
-Técnico em Eletromecânica;Controle e Processos Industriais;https://SEU-DOMINIO/cursos/tecnico-em-eletromecanica/
-Técnico em Eletrotécnica;Controle e Processos Industriais;https://SEU-DOMINIO/cursos/tecnico-em-eletrotecnica/
-Técnico em Manutenção de Máquinas Navais;Controle e Processos Industriais;https://SEU-DOMINIO/cursos/tecnico-em-manutencao-de-maquinas-navais/
-Técnico em Refrigeração e Climatização;Controle e Processos Industriais;https://SEU-DOMINIO/cursos/tecnico-em-refrigeracao-e-climatizacao/
-Técnico em Soldagem;Controle e Processos Industriais;https://SEU-DOMINIO/cursos/tecnico-em-soldagem/
-Técnico em Edificações;Infraestrutura;https://SEU-DOMINIO/cursos/tecnico-em-edificacoes/
-Técnico em Design de Interiores;Infraestrutura;https://SEU-DOMINIO/cursos/tecnico-em-design-de-interiores/
-Técnico em Tradução e Interpretação de Libras;Desenvolvimento Educacional e Social;https://SEU-DOMINIO/cursos/tecnico-em-traducao-e-interpretacao-de-libras/
-Técnico em Estética;Ambiente e Saúde;https://SEU-DOMINIO/cursos/tecnico-em-estetica/
-Técnico em Farmácia;Ambiente e Saúde;https://SEU-DOMINIO/cursos/tecnico-em-farmacia/
-Técnico em Gerência em Saúde;Ambiente e Saúde;https://SEU-DOMINIO/cursos/tecnico-em-gerencia-em-saude/
-Técnico em Nutrição e Dietética;Ambiente e Saúde;https://SEU-DOMINIO/cursos/tecnico-em-nutricao-e-dietetica/
-Técnico em Óptica;Ambiente e Saúde;https://SEU-DOMINIO/cursos/tecnico-em-optica/
-Técnico em Mineração;Recursos Naturais;https://SEU-DOMINIO/cursos/tecnico-em-mineracao/
-Técnico em Guia de Turismo;Turismo, Hospitalidade e Lazer;https://SEU-DOMINIO/cursos/tecnico-em-guia-de-turismo/
-Técnico em Defesa Civil;Segurança;https://SEU-DOMINIO/cursos/tecnico-em-defesa-civil/
-Técnico em Trânsito;Transporte;https://SEU-DOMINIO/cursos/tecnico-em-transito/
+﻿Tipo;Curso;Área;URL da página
+Técnico por Competência;Técnico em Agente Comunitário de Saúde;Saúde;https://SEU-DOMINIO/cursos/tecnico-em-agente-comunitario-de-saude/
+Técnico por Competência;Técnico em Análises Clínicas;Saúde;https://SEU-DOMINIO/cursos/tecnico-em-analises-clinicas/
+Técnico por Competência;Técnico em Cuidados de Idosos;Saúde;https://SEU-DOMINIO/cursos/tecnico-em-cuidados-de-idosos/
+Técnico por Competência;Técnico em Enfermagem;Saúde;https://SEU-DOMINIO/cursos/tecnico-em-enfermagem/
+Técnico por Competência;Técnico em Equipamentos Biomédicos;Saúde;https://SEU-DOMINIO/cursos/tecnico-em-equipamentos-biomedicos/
+Técnico por Competência;Técnico em Estética;Saúde;https://SEU-DOMINIO/cursos/tecnico-em-estetica/
+Técnico por Competência;Técnico em Farmácia;Saúde;https://SEU-DOMINIO/cursos/tecnico-em-farmacia/
+Técnico por Competência;Técnico em Gerência em Saúde;Saúde;https://SEU-DOMINIO/cursos/tecnico-em-gerencia-em-saude/
+Técnico por Competência;Técnico em Nutrição e Dietética;Saúde;https://SEU-DOMINIO/cursos/tecnico-em-nutricao-e-dietetica/
+Técnico por Competência;Técnico em Veterinária;Saúde;https://SEU-DOMINIO/cursos/tecnico-em-veterinaria/
+Técnico por Competência;Técnico em Administração;Administração e Gestão;https://SEU-DOMINIO/cursos/tecnico-em-administracao/
+Técnico por Competência;Técnico em Contabilidade;Administração e Gestão;https://SEU-DOMINIO/cursos/tecnico-em-contabilidade/
+Técnico por Competência;Técnico em Logística;Administração e Gestão;https://SEU-DOMINIO/cursos/tecnico-em-logistica/
+Técnico por Competência;Técnico em Marketing;Administração e Gestão;https://SEU-DOMINIO/cursos/tecnico-em-marketing/
+Técnico por Competência;Técnico em Qualidade;Administração e Gestão;https://SEU-DOMINIO/cursos/tecnico-em-qualidade/
+Técnico por Competência;Técnico em Recursos Humanos;Administração e Gestão;https://SEU-DOMINIO/cursos/tecnico-em-recursos-humanos/
+Técnico por Competência;Técnico em Secretaria Escolar;Administração e Gestão;https://SEU-DOMINIO/cursos/tecnico-em-secretaria-escolar/
+Técnico por Competência;Técnico em Segurança do Trabalho;Administração e Gestão;https://SEU-DOMINIO/cursos/tecnico-em-seguranca-do-trabalho/
+Técnico por Competência;Técnico em Serviços Jurídicos;Administração e Gestão;https://SEU-DOMINIO/cursos/tecnico-em-servicos-juridicos/
+Técnico por Competência;Técnico em Transações Imobiliárias;Administração e Gestão;https://SEU-DOMINIO/cursos/tecnico-em-transacoes-imobiliarias/
+Técnico por Competência;Técnico em Vendas;Administração e Gestão;https://SEU-DOMINIO/cursos/tecnico-em-vendas/
+Técnico por Competência;Técnico em Eventos;Administração e Gestão;https://SEU-DOMINIO/cursos/tecnico-em-eventos/
+Técnico por Competência;Técnico em Biotecnologia;Tecnologia e Informática;https://SEU-DOMINIO/cursos/tecnico-em-biotecnologia/
+Técnico por Competência;Técnico em Design Gráfico;Tecnologia e Informática;https://SEU-DOMINIO/cursos/tecnico-em-design-grafico/
+Técnico por Competência;Técnico em Desenvolvimento de Sistemas;Tecnologia e Informática;https://SEU-DOMINIO/cursos/tecnico-em-desenvolvimento-de-sistemas/
+Técnico por Competência;Técnico em Informática para Internet;Tecnologia e Informática;https://SEU-DOMINIO/cursos/tecnico-em-informatica-para-internet/
+Técnico por Competência;Técnico em Redes de Computadores;Tecnologia e Informática;https://SEU-DOMINIO/cursos/tecnico-em-redes-de-computadores/
+Técnico por Competência;Técnico em Sistemas de Energia Renovável;Tecnologia e Informática;https://SEU-DOMINIO/cursos/tecnico-em-sistemas-de-energia-renovavel/
+Técnico por Competência;Técnico em Telecomunicações;Tecnologia e Informática;https://SEU-DOMINIO/cursos/tecnico-em-telecomunicacoes/
+Técnico por Competência;Técnico em Tradução e Interpretação de Libras;Tecnologia e Informática;https://SEU-DOMINIO/cursos/tecnico-em-traducao-e-interpretacao-de-libras/
+Técnico por Competência;Técnico em Automação Industrial;Engenharia e Manutenção;https://SEU-DOMINIO/cursos/tecnico-em-automacao-industrial/
+Técnico por Competência;Técnico em Eletromecânica;Engenharia e Manutenção;https://SEU-DOMINIO/cursos/tecnico-em-eletromecanica/
+Técnico por Competência;Técnico em Eletrotécnica;Engenharia e Manutenção;https://SEU-DOMINIO/cursos/tecnico-em-eletrotecnica/
+Técnico por Competência;Técnico em Eletrônica;Engenharia e Manutenção;https://SEU-DOMINIO/cursos/tecnico-em-eletronica/
+Técnico por Competência;Técnico em Manutenção de Máquinas Industriais;Engenharia e Manutenção;https://SEU-DOMINIO/cursos/tecnico-em-manutencao-de-maquinas-industriais/
+Técnico por Competência;Técnico em Máquinas Pesadas;Engenharia e Manutenção;https://SEU-DOMINIO/cursos/tecnico-em-maquinas-pesadas/
+Técnico por Competência;Técnico em Metalurgia;Engenharia e Manutenção;https://SEU-DOMINIO/cursos/tecnico-em-metalurgia/
+Técnico por Competência;Técnico em Refrigeração e Climatização;Engenharia e Manutenção;https://SEU-DOMINIO/cursos/tecnico-em-refrigeracao-e-climatizacao/
+Técnico por Competência;Técnico em Soldagem;Engenharia e Manutenção;https://SEU-DOMINIO/cursos/tecnico-em-soldagem/
+Técnico por Competência;Técnico em Manutenção de Máquinas Navais;Engenharia e Manutenção;https://SEU-DOMINIO/cursos/tecnico-em-manutencao-de-maquinas-navais/
+Técnico por Competência;Técnico em Agrimensura;Construção e Infraestrutura;https://SEU-DOMINIO/cursos/tecnico-em-agrimensura/
+Técnico por Competência;Técnico em Edificações;Construção e Infraestrutura;https://SEU-DOMINIO/cursos/tecnico-em-edificacoes/
+Técnico por Competência;Técnico em Mineração;Construção e Infraestrutura;https://SEU-DOMINIO/cursos/tecnico-em-mineracao/
+Técnico por Competência;Técnico em Prevenção e Combate ao Incêndio;Construção e Infraestrutura;https://SEU-DOMINIO/cursos/tecnico-em-prevencao-e-combate-ao-incendio/
+Técnico por Competência;Técnico em Defesa Civil;Construção e Infraestrutura;https://SEU-DOMINIO/cursos/tecnico-em-defesa-civil/
+Técnico por Competência;Técnico em Trânsito;Construção e Infraestrutura;https://SEU-DOMINIO/cursos/tecnico-em-transito/
+Técnico por Competência;Técnico em Agricultura;Meio Ambiente e Agropecuária;https://SEU-DOMINIO/cursos/tecnico-em-agricultura/
+Técnico por Competência;Técnico em Agropecuária;Meio Ambiente e Agropecuária;https://SEU-DOMINIO/cursos/tecnico-em-agropecuaria/
+Técnico por Competência;Técnico em Aquicultura;Meio Ambiente e Agropecuária;https://SEU-DOMINIO/cursos/tecnico-em-aquicultura/
+Técnico por Competência;Técnico em Meio Ambiente;Meio Ambiente e Agropecuária;https://SEU-DOMINIO/cursos/tecnico-em-meio-ambiente/
+Técnico por Competência;Técnico em Gastronomia;Serviços;https://SEU-DOMINIO/cursos/tecnico-em-gastronomia/
+Técnico por Competência;Técnico em Design de Interiores;Serviços;https://SEU-DOMINIO/cursos/tecnico-em-design-de-interiores/
+Técnico por Competência;Técnico em Guia de Turismo;Serviços;https://SEU-DOMINIO/cursos/tecnico-em-guia-de-turismo/
+Técnico Regular;Técnico em Mecânica;Engenharia e Manutenção;https://SEU-DOMINIO/tecnico-regular/tecnico-em-mecanica/
+Técnico Regular;Técnico em Eletrotécnica;Engenharia e Manutenção;https://SEU-DOMINIO/tecnico-regular/tecnico-em-eletrotecnica/
+Técnico Regular;Técnico em Segurança do Trabalho;Engenharia e Manutenção;https://SEU-DOMINIO/tecnico-regular/tecnico-em-seguranca-do-trabalho/
+Técnico Regular;Técnico em Automação Industrial;Engenharia e Manutenção;https://SEU-DOMINIO/tecnico-regular/tecnico-em-automacao-industrial/
+Técnico Regular;Técnico em Eletromecânica;Engenharia e Manutenção;https://SEU-DOMINIO/tecnico-regular/tecnico-em-eletromecanica/
+Técnico Regular;Técnico em Eletroeletrônica;Engenharia e Manutenção;https://SEU-DOMINIO/tecnico-regular/tecnico-em-eletroeletronica/
+Técnico Regular;Técnico em Eletrônica;Engenharia e Manutenção;https://SEU-DOMINIO/tecnico-regular/tecnico-em-eletronica/
+Técnico Regular;Técnico em Mecatrônica;Engenharia e Manutenção;https://SEU-DOMINIO/tecnico-regular/tecnico-em-mecatronica/
+Técnico Regular;Técnico em Refrigeração e Climatização;Engenharia e Manutenção;https://SEU-DOMINIO/tecnico-regular/tecnico-em-refrigeracao-e-climatizacao/
+Técnico Regular;Técnico em Soldagem;Engenharia e Manutenção;https://SEU-DOMINIO/tecnico-regular/tecnico-em-soldagem/
+Técnico Regular;Técnico em Metalurgia;Engenharia e Manutenção;https://SEU-DOMINIO/tecnico-regular/tecnico-em-metalurgia/
+Técnico Regular;Técnico em Petróleo e Gás;Engenharia e Manutenção;https://SEU-DOMINIO/tecnico-regular/tecnico-em-petroleo-e-gas/
+Técnico Regular;Técnico em Qualidade;Engenharia e Manutenção;https://SEU-DOMINIO/tecnico-regular/tecnico-em-qualidade/
+Técnico Regular;Técnico em Manutenção de Máquinas Industriais;Engenharia e Manutenção;https://SEU-DOMINIO/tecnico-regular/tecnico-em-manutencao-de-maquinas-industriais/
+Técnico Regular;Técnico em Manutenção de Máquinas Navais;Engenharia e Manutenção;https://SEU-DOMINIO/tecnico-regular/tecnico-em-manutencao-de-maquinas-navais/
+Técnico Regular;Técnico em Máquinas Pesadas;Engenharia e Manutenção;https://SEU-DOMINIO/tecnico-regular/tecnico-em-maquinas-pesadas/
+Técnico Regular;Técnico em Estradas;Engenharia e Manutenção;https://SEU-DOMINIO/tecnico-regular/tecnico-em-estradas/
+Técnico Regular;Técnico em Administração;Administração, Gestão e Serviços;https://SEU-DOMINIO/tecnico-regular/tecnico-em-administracao/
+Técnico Regular;Técnico em Contabilidade;Administração, Gestão e Serviços;https://SEU-DOMINIO/tecnico-regular/tecnico-em-contabilidade/
+Técnico Regular;Técnico em Finanças;Administração, Gestão e Serviços;https://SEU-DOMINIO/tecnico-regular/tecnico-em-financas/
+Técnico Regular;Técnico em Logística;Administração, Gestão e Serviços;https://SEU-DOMINIO/tecnico-regular/tecnico-em-logistica/
+Técnico Regular;Técnico em Recursos Humanos;Administração, Gestão e Serviços;https://SEU-DOMINIO/tecnico-regular/tecnico-em-recursos-humanos/
+Técnico Regular;Técnico em Marketing e Comunicação;Administração, Gestão e Serviços;https://SEU-DOMINIO/tecnico-regular/tecnico-em-marketing-e-comunicacao/
+Técnico Regular;Técnico em Vendas;Administração, Gestão e Serviços;https://SEU-DOMINIO/tecnico-regular/tecnico-em-vendas/
+Técnico Regular;Técnico em Serviços Jurídicos;Administração, Gestão e Serviços;https://SEU-DOMINIO/tecnico-regular/tecnico-em-servicos-juridicos/
+Técnico Regular;Técnico em Transações Imobiliárias;Administração, Gestão e Serviços;https://SEU-DOMINIO/tecnico-regular/tecnico-em-transacoes-imobiliarias/
+Técnico Regular;Técnico em Seguros;Administração, Gestão e Serviços;https://SEU-DOMINIO/tecnico-regular/tecnico-em-seguros/
+Técnico Regular;Técnico em Secretaria Escolar;Administração, Gestão e Serviços;https://SEU-DOMINIO/tecnico-regular/tecnico-em-secretaria-escolar/
+Técnico Regular;Técnico em Eventos;Administração, Gestão e Serviços;https://SEU-DOMINIO/tecnico-regular/tecnico-em-eventos/
+Técnico Regular;Técnico em Guia de Turismo;Administração, Gestão e Serviços;https://SEU-DOMINIO/tecnico-regular/tecnico-em-guia-de-turismo/
+Técnico Regular;Técnico em Gastronomia;Administração, Gestão e Serviços;https://SEU-DOMINIO/tecnico-regular/tecnico-em-gastronomia/
+Técnico Regular;Técnico em Confeitaria;Administração, Gestão e Serviços;https://SEU-DOMINIO/tecnico-regular/tecnico-em-confeitaria/
+Técnico Regular;Técnico em Design de Interiores;Administração, Gestão e Serviços;https://SEU-DOMINIO/tecnico-regular/tecnico-em-design-de-interiores/
+Técnico Regular;Técnico em Geoprocessamento;Administração, Gestão e Serviços;https://SEU-DOMINIO/tecnico-regular/tecnico-em-geoprocessamento/
+Técnico Regular;Técnico em Informática;Tecnologia e Informática;https://SEU-DOMINIO/tecnico-regular/tecnico-em-informatica/
+Técnico Regular;Técnico em Desenvolvimento de Sistemas;Tecnologia e Informática;https://SEU-DOMINIO/tecnico-regular/tecnico-em-desenvolvimento-de-sistemas/
+Técnico Regular;Técnico em Informática para Internet;Tecnologia e Informática;https://SEU-DOMINIO/tecnico-regular/tecnico-em-informatica-para-internet/
+Técnico Regular;Técnico em Redes de Computadores;Tecnologia e Informática;https://SEU-DOMINIO/tecnico-regular/tecnico-em-redes-de-computadores/
+Técnico Regular;Técnico em Computação Gráfica;Tecnologia e Informática;https://SEU-DOMINIO/tecnico-regular/tecnico-em-computacao-grafica/
+Técnico Regular;Técnico em Programação de Jogos Digitais;Tecnologia e Informática;https://SEU-DOMINIO/tecnico-regular/tecnico-em-programacao-de-jogos-digitais/
+Técnico Regular;Técnico em Design Gráfico;Tecnologia e Informática;https://SEU-DOMINIO/tecnico-regular/tecnico-em-design-grafico/
+Técnico Regular;Técnico em Telecomunicações;Tecnologia e Informática;https://SEU-DOMINIO/tecnico-regular/tecnico-em-telecomunicacoes/
+Técnico Regular;Técnico em Sistemas de Energia Renovável;Tecnologia e Informática;https://SEU-DOMINIO/tecnico-regular/tecnico-em-sistemas-de-energia-renovavel/
+Técnico Regular;Técnico em Biotecnologia;Tecnologia e Informática;https://SEU-DOMINIO/tecnico-regular/tecnico-em-biotecnologia/
+Técnico Regular;Técnico em Tradução e Interpretação de Libras;Tecnologia e Informática;https://SEU-DOMINIO/tecnico-regular/tecnico-em-traducao-e-interpretacao-de-libras/
+Técnico Regular;Técnico em Meio Ambiente;Meio Ambiente e Agropecuária;https://SEU-DOMINIO/tecnico-regular/tecnico-em-meio-ambiente/
+Técnico Regular;Técnico em Saneamento;Meio Ambiente e Agropecuária;https://SEU-DOMINIO/tecnico-regular/tecnico-em-saneamento/
+Técnico Regular;Técnico em Agricultura;Meio Ambiente e Agropecuária;https://SEU-DOMINIO/tecnico-regular/tecnico-em-agricultura/
+Técnico Regular;Técnico em Agropecuária;Meio Ambiente e Agropecuária;https://SEU-DOMINIO/tecnico-regular/tecnico-em-agropecuaria/
+Técnico Regular;Técnico em Agroindústria;Meio Ambiente e Agropecuária;https://SEU-DOMINIO/tecnico-regular/tecnico-em-agroindustria/
+Técnico Regular;Técnico em Aquicultura;Meio Ambiente e Agropecuária;https://SEU-DOMINIO/tecnico-regular/tecnico-em-aquicultura/
+Técnico Regular;Técnico em Edificações;Construção e Infraestrutura;https://SEU-DOMINIO/tecnico-regular/tecnico-em-edificacoes/
+Técnico Regular;Técnico em Mineração;Construção e Infraestrutura;https://SEU-DOMINIO/tecnico-regular/tecnico-em-mineracao/
+Técnico Regular;Técnico em Prevenção e Combate ao Incêndio;Construção e Infraestrutura;https://SEU-DOMINIO/tecnico-regular/tecnico-em-prevencao-e-combate-ao-incendio/
+Técnico Regular;Técnico em Defesa Civil;Construção e Infraestrutura;https://SEU-DOMINIO/tecnico-regular/tecnico-em-defesa-civil/
+Técnico Regular;Técnico em Trânsito;Construção e Infraestrutura;https://SEU-DOMINIO/tecnico-regular/tecnico-em-transito/
+Técnico Regular;Técnico em Gerência em Saúde;Saúde;https://SEU-DOMINIO/tecnico-regular/tecnico-em-gerencia-em-saude/
+Técnico Regular;Técnico em Agente Comunitário de Saúde;Saúde;https://SEU-DOMINIO/tecnico-regular/tecnico-em-agente-comunitario-de-saude/
+Técnico Regular;Técnico em Nutrição e Dietética;Saúde;https://SEU-DOMINIO/tecnico-regular/tecnico-em-nutricao-e-dietetica/
+Técnico Regular;Técnico em Estética e Cosmetologia;Saúde;https://SEU-DOMINIO/tecnico-regular/tecnico-em-estetica-e-cosmetologia/

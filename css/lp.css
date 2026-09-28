@@ -144,3 +144,12 @@
   .lp-bar .btn--whatsapp .i { width: 24px; height: 24px; }
   .lp .lp-footer { padding-bottom: 96px; }
 }
+
+/* Técnico Regular → chamada para o Técnico por Competência */
+.lp-cross { display: flex; align-items: center; justify-content: space-between; gap: 32px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 36px 40px; box-shadow: var(--shadow-sm); }
+.lp-cross > div { max-width: 680px; }
+.lp-cross .title { margin-top: 8px; }
+.lp-cross .lead { margin-top: 12px; }
+.lp-cross .btn { flex-shrink: 0; }
+@media (max-width: 760px) { .lp-cross { flex-direction: column; align-items: flex-start; padding: 28px 22px; } .lp-cross .btn { width: 100%; white-space: normal; } }
+.lp-price__inst { flex-basis: 100%; font-weight: 700; color: #BFF3D2; }
