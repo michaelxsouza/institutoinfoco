@@ -9,13 +9,22 @@
   <meta property="og:title" content="Instituto Infoco — Conhecimento que transforma oportunidades" />
   <meta property="og:description" content="Cursos e soluções de formação para desenvolver suas habilidades e dar um novo passo na sua trajetória profissional." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/img/logo-instituto-infoco.png" />
+  <meta property="og:image" content="assets/img/og-instituto-infoco.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <link rel="apple-touch-icon" href="assets/img/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
+  <!-- Imagem principal carregada primeiro (melhora a velocidade percebida) -->
+  <link rel="preload" as="image" type="image/webp" media="(max-width: 1100px)"
+        imagesrcset="assets/img/hero-instituto-infoco-mobile-480.webp 480w, assets/img/hero-instituto-infoco-mobile-720.webp 720w"
+        imagesizes="min(460px, calc(100vw - 32px))" fetchpriority="high" />
+  <link rel="preload" as="image" type="image/webp" media="(min-width: 1101px)"
+        imagesrcset="assets/img/hero-instituto-infoco-700.webp 700w, assets/img/hero-instituto-infoco-1036.webp 1036w"
+        imagesizes="(min-width: 1600px) 900px, 55vw" fetchpriority="high" />
   <!-- Aviso de cookies (LGPD) — precisa vir antes do Google Ads/Analytics -->
   <script src="js/consent.js"></script>
   <script type="application/ld+json">
@@ -83,10 +92,14 @@
 
         <!-- Imagem principal do hero -->
         <picture class="hero__media">
-          <source media="(max-width: 1100px)" srcset="assets/img/hero-instituto-infoco-mobile.webp" type="image/webp" />
+          <source media="(max-width: 1100px)" type="image/webp"
+                  srcset="assets/img/hero-instituto-infoco-mobile-480.webp 480w, assets/img/hero-instituto-infoco-mobile-720.webp 720w"
+                  sizes="min(460px, calc(100vw - 32px))" />
           <source media="(max-width: 1100px)" srcset="assets/img/hero-instituto-infoco-mobile.jpg" type="image/jpeg" />
-          <source srcset="assets/img/hero-instituto-infoco.webp" type="image/webp" />
-          <img src="assets/img/hero-instituto-infoco.jpg" width="1036" height="984" fetchpriority="high"
+          <source type="image/webp"
+                  srcset="assets/img/hero-instituto-infoco-700.webp 700w, assets/img/hero-instituto-infoco-1036.webp 1036w"
+                  sizes="(min-width: 1600px) 900px, 55vw" />
+          <img src="assets/img/hero-instituto-infoco.jpg" width="1036" height="984" fetchpriority="high" decoding="async"
                alt="Estudante sorrindo segurando cadernos, cercada por profissionais de diferentes áreas e pelo logotipo do Instituto Infoco" />
         </picture>
       </div>
@@ -178,7 +191,7 @@
     </section>
 
     <!-- ============ COMO FUNCIONA ============ -->
-    <section class="section" id="como-funciona">
+    <section class="section section--soft" id="como-funciona">
       <div class="container">
         <header class="section__head reveal">
           <span class="eyebrow">Como funciona</span>
@@ -190,7 +203,7 @@
     </section>
 
     <!-- ============ REQUISITOS ============ -->
-    <section class="section section--soft" id="requisitos">
+    <section class="section" id="requisitos">
       <div class="container">
         <header class="section__head reveal">
           <span class="eyebrow">Requisitos</span>
@@ -209,7 +222,7 @@
     </section>
 
     <!-- ============ BENEFÍCIOS ============ -->
-    <section class="section" id="beneficios">
+    <section class="section section--soft" id="beneficios">
       <div class="container">
         <header class="section__head reveal">
           <span class="eyebrow">Diferenciais</span>
@@ -220,7 +233,7 @@
     </section>
 
     <!-- ============ VALORES ============ -->
-    <section class="section section--soft" id="valores">
+    <section class="section" id="valores">
       <div class="container pricing">
         <div class="pricing__intro reveal">
           <span class="eyebrow">Valores</span>
