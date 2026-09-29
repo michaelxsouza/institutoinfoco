@@ -688,9 +688,9 @@ const cleanup = (dir, keep) => {
 const removed = cleanup("cursos", S.courses.map((c) => c.slug)).concat(cleanup("tecnico-regular", R.show ? regularList.map((c) => c.slug) : []));
 
 // Lista dos cursos que têm imagem, usada pelos cards do site principal
-const withImg = S.courses.filter((c) => hasImage(c.slug)).map((c) => c.slug);
+const withImg = [...new Set(S.courses.map((c) => c.slug).concat(regularList.map((c) => c.slug)))].filter(hasImage);
 write("js/course-images.js", `/* Gerado por scripts/gerar-lps.js — não edite à mão */\nwindow.COURSE_IMAGES = ${JSON.stringify(withImg, null, 2)};\n`);
-const missing = S.courses.filter((c) => !hasImage(c.slug)).map((c) => c.slug);
+const missing = [...new Set(S.courses.map((c) => c.slug).concat(regularList.map((c) => c.slug)))].filter((s) => !hasImage(s));
 write("obrigado/index.html", thankYouPage());
 write("politica-de-privacidade/index.html", privacyPage());
 

@@ -226,8 +226,14 @@
     const R = regularCourses;
     const RP = R.pricing || { show: false };
     if (RP.show) $("#regularPriceNote").innerHTML = `${esc(RP.discountLabel)}: de <s>${esc(RP.oldPrice)}</s> por <strong>${esc(RP.price)}</strong> ${esc(RP.installments)}.`;
-    $("#regularFeatured").innerHTML = R.featured.map((c, i) => `
-      <article class="course course--regular">
+    // Fotos nos destaques só quando todos os 6 tiverem foto (mantém os cards alinhados)
+    const featImg = R.featured.every((c) => COURSE_IMG.has(window.SITE.slugify(c.name)));
+    $("#regularFeatured").innerHTML = R.featured.map((c, i) => {
+      const slug = window.SITE.slugify(c.name);
+      const img = featImg;
+      return `
+      <article class="course course--regular${img ? " course--img" : ""}">
+        ${img ? `<div class="course__media"><img src="assets/img/cursos/${slug}-card.webp" width="720" height="480" loading="lazy" alt="${esc(c.name)}" /></div>` : ""}
         <div class="course__head">
           <span class="course__icon">${icon(c.icon)}</span>
           <div>
@@ -239,9 +245,10 @@
         ${RP.show ? `<p class="course__price"><s>${esc(RP.oldPrice)}</s> <strong>${esc(RP.price)}</strong> <small>${esc(RP.installments)}</small></p>` : ""}
         <div class="course__actions">
           <button type="button" class="btn btn--primary js-regular" data-name="${esc(c.name)}">Tenho interesse ${icon("arrow")}</button>
-          <a class="course__link" href="tecnico-regular/${window.SITE.slugify(c.name)}/">Ver detalhes do curso</a>
+          <a class="course__link" href="tecnico-regular/${slug}/">Ver detalhes do curso</a>
         </div>
-      </article>`).join("");
+      </article>`;
+    }).join("");
     $("#regularAll").innerHTML = R.categories.map((cat) => `
       <div class="reg-area">
         <h4>${icon(cat.icon)} ${esc(cat.name)} <span class="chip__n">${cat.courses.length}</span></h4>

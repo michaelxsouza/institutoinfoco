@@ -61,6 +61,14 @@ sem menu, formulário no topo, preço, etapas, requisitos, FAQ e botão fixo no 
 Depois do envio do formulário, o visitante vai para `obrigado/`, onde a conversão é registrada uma única vez.
 Cliques no WhatsApp também podem virar conversão com `whatsappConversionLabel`.
 
+## Fotos dos cursos
+
+1. Gere a foto com os prompts de `docs/prompts-imagens-cursos-2026.md` (formato 3:2).
+2. Salve em `assets/img/_originais/<nome-do-curso>.png` (o nome é o final do endereço da página, ex.: `tecnico-em-mecanica`).
+3. Rode `python scripts/processar-imagens.py` (cria as versões `.webp`) e depois `node scripts/gerar-lps.js`.
+
+Cursos sem foto usam o ícone da área. A lista dos que faltam aparece ao rodar o gerador.
+
 ## Antes de publicar — checklist
 
 - [ ] Substituir todos os textos entre colchetes (`[NOME DO CURSO]`, `[CATEGORIA 1]`, etc.)
