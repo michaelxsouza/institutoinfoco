@@ -571,7 +571,29 @@
     });
   }
 
+  /* ---------------- Google Analytics / Google Ads (IDs em lpSettings.tracking) ----------------
+     O consentimento (js/consent.js) já foi definido no <head>; sem "Aceitar", nada é gravado. */
+  function initTracking() {
+    const T = (window.SITE.lpSettings && window.SITE.lpSettings.tracking) || {};
+    const ids = [T.ga4Id, T.googleAdsId].filter(Boolean);
+    if (!ids.length) return;
+    const s = document.createElement("script");
+    s.async = true; s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ids[0])}`;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    ids.forEach((id) => window.gtag("config", id));
+    // Cliques no WhatsApp viram evento (e conversão, se houver rótulo)
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".js-wa")) return;
+      window.gtag("event", "whatsapp_click", { page: "site" });
+      if (T.googleAdsId && T.whatsappConversionLabel) window.gtag("event", "conversion", { send_to: `${T.googleAdsId}/${T.whatsappConversionLabel}` });
+    });
+  }
+
   /* ---------------- Inicialização ---------------- */
+  initTracking();
   document.documentElement.classList.remove("no-js");
   hydrateIcons();
   bindContact();

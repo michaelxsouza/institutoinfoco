@@ -61,6 +61,12 @@ sem menu, formulário no topo, preço, etapas, requisitos, FAQ e botão fixo no 
 Depois do envio do formulário, o visitante vai para `obrigado/`, onde a conversão é registrada uma única vez.
 Cliques no WhatsApp também podem virar conversão com `whatsappConversionLabel`.
 
+## Cookies (LGPD) e medição
+
+- `js/consent.js` mostra o aviso de cookies em todas as páginas e aplica o Google Consent Mode v2: sem "Aceitar", o Google Analytics e o Google Ads não gravam cookies.
+- O link "Preferências de cookies" no rodapé reabre o aviso.
+- Os IDs do Google (`ga4Id`, `googleAdsId`) ficam em `lpSettings.tracking` no `js/config.js` e valem para o site principal e para as páginas de captura (rode `node scripts/gerar-lps.js` depois de preencher).
+
 ## Fotos dos cursos
 
 1. Gere a foto com os prompts de `docs/prompts-imagens-cursos-2026.md` (formato 3:2).

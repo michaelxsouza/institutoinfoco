@@ -81,6 +81,7 @@ function head({ title, description, rel, canonical, noindex, image }) {
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="${rel}css/styles.css" />
   <link rel="stylesheet" href="${rel}css/lp.css" />
+  <script src="${rel}js/consent.js"></script>
 ${gtagHead()}
 </head>`;
 }
@@ -102,7 +103,7 @@ function footer(rel) {
     <div class="container">
       <p><strong>${esc(C.name)}</strong> · CNPJ ${esc(C.cnpj)}</p>
       <p>${esc(C.serviceNote)} WhatsApp ${esc(C.whatsappDisplay)} · ${esc(C.email)}</p>
-      <p><a href="${rel}">Site do Instituto</a> · <a href="${rel}politica-de-privacidade/">Política de Privacidade</a></p>
+      <p><a href="${rel}">Site do Instituto</a> · <a href="${rel}politica-de-privacidade/">Política de Privacidade</a> · <button type="button" class="cookie-link" data-cookie-settings>Preferências de cookies</button></p>
     </div>
   </footer>`;
 }
@@ -652,7 +653,8 @@ ${header(rel, "Olá! Tenho uma dúvida sobre meus dados.")}
       <h2>5. Compartilhamento</h2>
       <p>Não vendemos seus dados. Eles podem ser processados por fornecedores que nos ajudam a operar o site e o atendimento, como serviços de e-mail, formulários, WhatsApp e ferramentas de publicidade e análise do Google.</p>
       <h2>6. Cookies</h2>
-      <p>O site pode usar cookies do Google para medir visitas e conversões de anúncios. Você pode bloqueá-los nas configurações do seu navegador.</p>
+      <p>Usamos cookies necessários ao funcionamento do site e, somente com a sua autorização, cookies de medição e publicidade do Google (Google Analytics e Google Ads), que nos ajudam a contar visitas e a medir o resultado dos anúncios.</p>
+      <p>Na primeira visita, mostramos um aviso para você <strong>aceitar ou recusar</strong> esses cookies. Enquanto não houver autorização, eles não são gravados. Sua escolha fica salva por 12 meses e pode ser alterada a qualquer momento em <button type="button" class="cookie-link" data-cookie-settings>Preferências de cookies</button>, no rodapé de todas as páginas. Você também pode apagar os cookies nas configurações do seu navegador.</p>
       <h2>7. Seus direitos</h2>
       <p>Você pode pedir a confirmação, o acesso, a correção ou a exclusão dos seus dados e revogar o consentimento a qualquer momento pelo e-mail ${esc(C.email)}.</p>
       <h2>8. Por quanto tempo guardamos</h2>
